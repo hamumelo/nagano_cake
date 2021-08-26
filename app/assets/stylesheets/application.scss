@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap";
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+
+.nav_btn {
+  margin: 15px 20px;
+}
+
+header {
+    border-width: 5px;
+}
