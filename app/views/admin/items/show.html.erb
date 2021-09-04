@@ -1,0 +1,74 @@
+<%= render 'admin/homes/admin_header' %>
+
+
+<!--商品詳細ページ-->
+<div class="container">
+  <div class="row">
+    <div class="mt-4 mb-4 col-4">
+      <h5 class="bg-light"><strong>商品詳細</strong></h5>
+    </div>
+  </div>
+</div>
+     
+  
+<div class="container mt-5">
+     <div class="row">
+       <div class="col-md-3">
+        <%= attachment_image_tag @item, :image, :fill, 320,180, format: 'jpeg', fallback: "no_image.jpg" %>
+       </div>
+       
+    <div class='col-md-8 offset-md-1'>
+    
+     <div class="row mb-2">
+       <div class="col-sm-2">
+        <small><label>商品名</label></small>
+       </div>
+         <div class="col-sm-6">
+          <strong><%= @item.name %></strong>
+         </div>
+     </div>
+     
+     <div class="row mb-2">
+       <div class="col-sm-2">
+        <small><label>商品説明</label></small>
+       </div>
+         <div class="col-sm-6">
+          <strong><%= @item.introduction %></strong>
+         </div>
+     </div>
+     
+     <div class="row mb-2">
+       <div class="col-sm-2">
+        <small><label>ジャンル</label></small>
+       </div>
+         <div class="col-sm-6">
+          <strong><%= @item.genre.name %></strong>
+         </div>
+     </div>
+     
+     <div class="row mb-2">
+       <div class="col-sm-2">
+        <small><label>税込価格<br>(税抜価格)</br></label></small>
+       </div>
+         <div class="col-sm-4 pt-2">
+          <strong><%= converting_to_jpy(@item.with_tax_price) %> (<%= converting_to_jpy(@item.price) %>)</strong> 円
+         </div>
+     </div>
+     
+     <div class="row mb-2">
+       <div class="col-sm-2">
+        <small><label>販売ステータス</label></small>
+       </div>
+         <div class="col-sm-4">
+          <strong><%= @item.is_active %></strong>
+         </div>
+     </div>
+     
+     <div class="row mb-2">
+       <div class="col-sm-2">
+      　 <%= link_to '編集する', edit_admin_item_path(@item.id), class: "btn btn-success btn-md btn-block" %>
+       </div>
+     </div>
+     
+     </div>
+     </div>

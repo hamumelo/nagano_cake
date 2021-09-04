@@ -1,0 +1,55 @@
+<%= render 'admin/homes/admin_header' %>
+
+
+<!--会員一覧画面-->
+<div class="container">
+  <div class="form-group row">
+    <div class="mt-5 col-sm-2.5">
+      <h5 class="bg-light"><strong>会員一覧</strong></h5>
+    </div>
+  </div>
+  
+  
+  
+  <div class="container">
+  <div class="row">
+    <div class='col-md-8 offset-md-1'>
+
+ <table class='table table-hover table-inverse'>
+  <thead>
+    <tr>
+      <th>会員ID</th>
+      <th>氏名</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    
+    <% @customers.each do |customer| %>
+      <tr>
+        <td>
+          <%= customer.id %>
+        </td>
+        <td>
+          <%= link_to admin_customer_path(customer.id) do %>
+          <%= customer.first_name %><%= customer._name %>
+          <% end %>
+        </td>
+        <td>
+          <%= customer.email %>
+        </td>
+        <td>
+          <%= customer.is_active %>
+        </td>
+  
+    <% end %>
+  </tbody>
+ </table>
+</div>
+</div>
+</div>
+
+<%= paginate @customers %>

@@ -4,34 +4,46 @@ Rails.application.routes.draw do
   passwords:     'admins/passwords',
   registrations: 'admins/registrations'
 }
-devise_for :customers, controllers: {
-  sessions:      'customers/sessions',
-  passwords:     'customers/passwords',
-  registrations: 'customers/registrations'
-}
+# devise_for :customers, controllers: {
+#   sessions:      'customers/sessions',
+#   passwords:     'customers/passwords',
+#   registrations: 'customers/registrations'
+# }
 
-  root to: 'homes#top'
-  get '/home/about' => 'homes#about'
+  root to: 'public/homes#top'
+  get '/about' => 'public/homes#about'
  
  
   # 顧客ページ
-  namespace :public do
-  resources :items, only: [:index, :show]
+  get '/items' => 'public/items#index'
+  get '/items/:id' => 'public/items#show'
+  
+  get '/customers/sign_up' => 'public/registrations#new', as: 'new_registrations'
+  get '/customers/sign_up' => 'public/registrations#new', as: 'new_registration'
+  post '/customers' => 'public/registrations#create'
+  
+  get '/customers/sign_in' => 'public/sessions#new', as: 'new_session'
+  post '/customers/sign_in' => 'public/sessions#create', as: 'session'
+  delete '/customers/sign_out' => 'public/sessions#destroy', as: 'destroy_session'
+  
+  get '/customers/my_page' => 'public/customers#show'
+  get '/customers/edit' => 'public/customers#edit'
+  patch '/customers' => 'public/customers#ediupdate'
+  get '/customers/unsubscribe' => 'public/customers#unsubscribe'
+  patch '/customers/withdraw' => 'public/customers#withdraw'
+  
+ scope module: :public do
+  resources :cart_items, only: [:index, :update, :destroy, :create]
  end
- 
-  namespace :public do
-  resources :customers, only: [:show, :edit, :update]
+  delete '/cart_items/destroy_all' => 'public/cart_items#destroy_all'
+  
+ scope module: :public do
+  resources :orders, only: [:new, :create, :index, :show]
  end
- 
-  namespace :public do
-  resources :cart_items, only: [:index, :update, :destroy, :destroy_all, :create]
- end
- 
-  namespace :public do
-  resources :orders, only: [:new, :comfirm, :complete, :create, :index, :show]
- end
- 
-  namespace :public do
+  post '/orders/confirm' => 'public/orders#comfirm'
+  post '/orders/complete' => 'public/orders#complete'
+  
+ scope module: :public do
   resources :addresses, only: [:index, :edit, :create, :update, :destroy]
  end
 
