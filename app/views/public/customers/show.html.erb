@@ -1,36 +1,66 @@
-<%= render 'public/homes/top_header' %>
+<%= render 'admin/homes/admin_header' %>
 
 
-<div class="container mt-5">
- <div class="row">
-  <div class="col-sm-2">
-  <!--ジャンル検索機能-->
+<!--顧客マイページ-->
+<div class="container">
+  <div class="row">
+    <div class="mt-4 mb-4 col-4">
+      <h5 class="bg-light"><strong>マイページ</strong></h5>
+    </div>
   </div>
-　
- <div class="row">
-   <div class="col-sm-2"></div>
-    <div class="col-sm-2">
-  　<span><%= image_tag 'home.jpg', size: "180x104" %></span>
-      <p>商品名</p>
-      <p>￥0,000</p>
-    </div>
- 
-    <div class="col-sm-2">
-  　<span><%= image_tag 'home.jpg', size: "180x104" %></span>
-      <p>商品名</p>
-      <p>￥0,000</p>
-    </div>
-    
-    <div class="col-sm-2">
-  　<span><%= image_tag 'home.jpg', size: "180x104" %></span>
-      <p>商品名</p>
-      <p>￥0,000</p>
-    </div>
-    
-    <div class="col-sm-2">
-  　<span><%= image_tag 'home.jpg', size: "180x104" %></span>
-      <p>商品名</p>
-      <p>￥0,000</p>
-    </div>
- </div>
 </div>
+    
+<div class="container">
+     <div class="row mb-2">
+       <div class="col-sm-2 border border-dark">
+        <small><label>氏名<label></small>
+       </div>
+         <div class="col-sm-5 border border-dark">
+          <small><%= @customer.last_name %>+<%= @customer.first_name %></small>
+         </div>
+     </div>
+     
+     <div class="row mb-2">
+       <div class="col-sm-2 border border-dark">
+        <small><label>カナ<label></small>
+       </div>
+         <div class="col-sm-5 border border-dark">
+          <small><%= @customer.last_name_kana %>+<%= @customer.first_name_kana %></small>
+         </div>
+     </div>
+     
+     <div class="row mb-2">
+       <div class="col-sm-2 border border-dark">
+        <small><label>郵便番号<label></small>
+       </div>
+         <div class="col-sm-5 border border-dark">
+          <small><%= @customer.postal_code %></small>
+         </div>
+     </div>
+     
+     <div class="row mb-2">
+       <div class="col-sm-2 border border-dark">
+        <small><label>住所<label></small>
+       </div>
+         <div class="col-sm-5 border border-dark">
+          <small><%= @customer.address %></small>
+         </div>
+     </div>
+     
+     <div class="row mb-2">
+       <div class="col-sm-2 border border-dark">
+        <small><label>電話番号<label></small>
+       </div>
+         <div class="col-sm-5 border border-dark">
+          <small><%= @customer.telephone_number %></small>
+         </div>
+     </div>
+     
+     <div class="row mb-2">
+       <div class="col-sm-2 border border-dark">
+        <small><label>メールアドレス<label></small>
+       </div>
+         <div class="col-sm-5 border border-dark">
+          <small><%= @customer.email %></small>
+         </div>
+     </div>

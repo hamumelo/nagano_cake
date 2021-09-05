@@ -7,7 +7,7 @@ class Public::RegistrationsController < ApplicationController
   def create
      @customer = Customer.new(customer_params)
      @customer.save
-    redirect_to admin_items_path(@item.id)
+    redirect_to customers_my_page_path
     # if @registration.save
     #   flash[:notice] = "genre was successfully created."
     # redirect_to admin_items_path(@item.id)

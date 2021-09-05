@@ -1,0 +1,115 @@
+<%= render 'admin/homes/admin_header' %>
+
+
+<!--商品詳細ページ-->
+<div class="container">
+  <div class="row">
+    <div class="mt-4 mb-4 col-4">
+      <h5 class="bg-light"><strong>注文履歴詳細</strong></h5>
+    </div>
+  </div>
+</div>
+    
+<div class="container">
+     <div class="row mb-2">
+       <div class="col-sm-2">
+        <label>購入者</label>
+       </div>
+         <div class="col-sm-6">
+          <%= @order.name %>
+         </div>
+     </div>
+    
+     <div class="row mb-2">
+       <div class="col-sm-2">
+        <label>注文日</label>
+       </div>
+         <div class="col-sm-6">
+          <%= @order.created_at %>
+         </div>
+     </div>
+     
+     <div class="row mb-2">
+       <div class="col-sm-2">
+        <label>配送先</label>
+       </div>
+         <div class="col-sm-6">
+          <%= @order.postal_code %>+<%= @order.address %></br >
+          <%= @order.name %>
+         </div>
+     </div>
+     
+     <div class="row mb-2">
+       <div class="col-sm-2">
+        <label>支払方法</label>
+       </div>
+         <div class="col-sm-6">
+          <%= @order.payment_method %>
+         </div>
+     </div>
+     
+     <div class="row mb-2">
+       <div class="col-sm-2">
+        <label>注文ステータス</label>
+       </div>
+         <div class="col-sm-4">
+         <%= f.collection_select(:status, @orders, :id, :name, {prompt: "--選択して下さい--"}, class: "form-control") %>
+         </div>
+       <div class="col-sm-2">
+        <%= f.submit '更新', class:"btn btn-success btn-sm" %>
+       </div>
+       
+       <table class='table table-hover table-inverse'>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+      <th>制作ステータス</th>
+      <th colspan="5"></th>
+    </tr>
+  </thead>
+  <tbody>
+    
+ <div class="row mb-2">
+  <div class="col-sm-7">
+    <% @order_details.each do |order_detail| %>
+      <tr>
+        <td>
+          <%= @item.name %>
+        </td>
+        <td>
+          <%= converting_to_jpy(@item.with_tax_price) %>
+        </td>
+        <td>
+          <%= order_detail.price %>
+        </td>
+        <td>
+          <%= @order.total_payment %>
+        </td>
+        <td>
+         <%= f.collection_select(:status, @orders, :id, :name, {prompt: "--選択して下さい--"}, class: "form-control") %>
+       <div class="col-sm-2">
+        <%= f.submit '更新', class:"btn btn-success btn-sm" %>
+       </div>
+        </td>
+    <% end %>
+  </div>
+       <div class="col-sm-3">
+        <label>商品合計</label></br >
+        <label>送料</label></br >
+        <label>商品合計</label></br >
+       </div>
+         <div class="col-sm-2">
+          <%= @order.total_payment %>
+          <%= @order.shipping_cost %>
+          <%= @order.total_payment %>
+         </div>
+  
+</div>
+  </tbody>
+ </table>
+</div>
+
+<%= paginate @order_details %>

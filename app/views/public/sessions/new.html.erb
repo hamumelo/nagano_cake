@@ -1,3 +1,4 @@
+  
 <%= render 'public/homes/top_header' %>
 
 <!--会員ログイン登録画面-->
@@ -13,7 +14,7 @@
     </div>
   </div>
   
-  <%= form_with model: @customer, url: session_path, local: true do |f| %>
+  <%= form_with model: @customer, url: customer_session_path, local: true do |f| %>
       
      <div class="field row mt-2 mx-auto">
         <div class="col-sm-1"></div>
@@ -50,6 +51,6 @@
     <div class="mt-5 col-sm-2.5">
       <h6 class="bg-light"><strong>会員登録がお済みでない方</strong></h6>
   <div class="row ml-5">
-    <%= link_to 'こちら', new_registrations_path %>　から新規登録してください。
+    <%= link_to 'こちら', new_customer_registration_path %>　から新規登録してください。
     </div>
   </div>

@@ -1,0 +1,33 @@
+<%= render 'public/homes/top_header' %>
+
+
+<div class="container mt-5">
+ <div class="row">
+  <div class="col-sm-2">
+  <!--ジャンル検索機能-->
+  </div>
+  </div>
+  </div>
+  
+<div class="container">
+  <div class="row">
+    <div class="mt-4 mb-4 col-4">
+      <h5 class="bg-light"><strong>注文履歴詳細</strong></h5>
+    </div>
+  </div>
+</div>
+    
+    
+
+
+<div class="container mt-5">
+ <div class="row">
+    <% @items.each do |item| %>
+    <div class="col-sm-3">
+  　<span><%= attachment_image_tag item, :image, size: "180x104", fallback: "no_image.jpg" %></span>
+      <p><%= item.name %></p>
+      <p><%= converting_to_jpy(item.with_tax_price) %></p>
+    </div>
+  <% end %>
+ </div>
+</div>

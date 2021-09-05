@@ -3,6 +3,8 @@ class Public::CustomersController < ApplicationController
   end
   
   def show
+     @customer = current_customer
+     @orders = Order.all
   end
 
   def edit
@@ -11,4 +13,4 @@ class Public::CustomersController < ApplicationController
   def update
   end
 end
-end
+
