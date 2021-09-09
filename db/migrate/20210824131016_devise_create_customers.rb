@@ -36,12 +36,10 @@ class DeviseCreateCustomers < ActiveRecord::Migration[5.2]
       t.string :first_name
       t.string :last_name_kana
       t.string :first_name_kana
-      t.string :email
-      t.string :encrypted_password
       t.string :postal_code
       t.string :address
       t.string :telephone_number
-      t.boolean :is_active, default: true
+      t.boolean :is_active, null: false, default: true
       t.datetime :created_at, default: -> { 'NOW()' }
       t.datetime :updated_at, default: -> { 'NOW()' }
 

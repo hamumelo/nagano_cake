@@ -1,0 +1,88 @@
+<%= render 'public/homes/top_header' %>
+
+<!--配送先登録/一覧画面-->
+<div class="container">
+  <div class="form-group row">
+    <div class="mt-5 col-sm-2.5">
+      <h5 class="bg-light"><strong>配送先登録/一覧</strong></h5>
+    </div>
+  </div>
+
+<%= form_with model: @address, url: addresses_path, local: true do |f| %>
+      
+     <div class="field row mt-2">
+        <div class="col-sm-2">
+        <small><%= f.label :postal_code, "郵便番号(ハイフンなし)" %></small>
+        </div>
+        <div class="col-sm-3">
+         <%= f.text_field :postal_code, autofocus: true, placeholder:"0000000", class: "form-control form-control-sm" %>
+        </div>
+    </div>
+      
+     <div class="field row mt-2">
+        <div class="col-sm-2">
+        <small><%= f.label :address, "住所" %></small>
+        </div>
+        <div class="col-sm-6">
+         <%= f.text_field :address, autofocus: true, placeholder:"東京都渋谷区代々木神園町0-0", class: "form-control form-control-sm" %>
+        </div>
+    </div>
+      
+     <div class="field row mt-3">
+        <div class="col-sm-2">
+        <small><%= f.label :name, "宛名" %></small>
+        </div>
+        <div class="field col-sm-3">
+          <%= f.text_field :name, autofocus: true, placeholder:"令和道子", class: "form-control form-control-sm" %>
+        </div>
+       <div class="col-sm-3"></div>
+       <div class="col-sm-2">
+        <%= f.submit '新規登録', class:"btn btn-success btn-sm btn-block" %>
+       </div>
+    </div>
+    <% end %>
+      </div>
+     </div>
+     
+     <div class="container">
+  <div class="row">
+    <div class='col-md-8 offset-md-1'>
+
+ <table class='table table-hover table-inverse'>
+  <thead>
+    <tr>
+      <th class="border border-dark bg-info">郵便番号</th>
+      <th class="border border-dark bg-info">住所</th>
+      <th class="border border-dark bg-info">宛名</th>
+      <th class="border border-dark bg-info"></th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    
+    <% @addresses.each do |address| %>
+      <tr>
+        <td class="border border-dark">
+          <%= address.postal_code %>
+        </td>
+        <td class="border border-dark">
+          <%= address.address %>
+        </td>
+        <td class="border border-dark">
+          <%= address.name %>
+        </td>
+        <td>
+          <%= customer.is_active %>
+        </td>
+  
+    <% end %>
+  </tbody>
+ </table>
+</div>
+</div>
+</div>
+
+<%= paginate @customers %>
+     
+     

@@ -1,0 +1,19 @@
+
+<%= render 'public/homes/top_header' %>
+
+<div class="text-center mt-5">
+  <h4 class="font-weight-bold">本当に退会しますか？</h4>
+   <p><pre  class="font-weight-bold">退会すると、会員登録情報や
+   これまでの購入履歴が閲覧できなくなります。
+   退会する場合は「退会する」をクリックしてください。</pre></p>
+</div>
+
+    <div class="row mt-5">
+       <div class="col-sm-5"></div>
+       <div class="col-sm-1 ml-auto">
+        <%= link_to '退会しない', customers_edit_path,class: "btn btn-primary btn-sm" %>
+       </div>
+       <div class="col-sm-6">
+        <%= link_to '退会する', customers_unsubscribe_path, class: "btn btn-danger btn-sm" %>
+       </div>
+    </div>

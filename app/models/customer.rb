@@ -7,5 +7,8 @@ class Customer < ApplicationRecord
          has_many :addresses, dependent: :destroy
          has_many :orders, dependent: :destroy
          has_many :cart_items, dependent: :destroy
+  
+  default_scope -> { order(created_at: :desc) }
+  # enum is_active: { true: true, false: false }
          
 end

@@ -4,13 +4,29 @@ class Admin::CustomersController < ApplicationController
   end
   
   def show
-    @item = Item.find(params[:id])
-    @genres = Genre.all
+    @customer = Customer.find(params[:id])
   end
 
   def edit
+    @customer = Customer.find(params[:id])
   end
 
   def update
+     @customer = Customer.find(params[:id])
+     @customer.update(customer_params)
+    redirect_to admin_customer_path(@customer.id)
+    # if @item.update(item_params)
+    #   flash[:notice] = "You have updated genre successfully."
+    # redirect_to admin_item_path(@item.id)
+    # else
+    #   render :edit
+    # end
   end
+
+  private
+
+  def customer_params
+    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :postal_code, :address, :telephone_number, :is_active)
+  end
+  
 end

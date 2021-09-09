@@ -1,4 +1,4 @@
-<%= render 'admin/homes/admin_header' %>
+<%= render 'public/customers/header' %>
 
 
 <!--顧客マイページ-->
@@ -9,28 +9,39 @@
     </div>
   </div>
 </div>
+     
+   <div class="container">
+     <div class="row mb-4">
+       <div class="col-sm-2">
+        <h5 class="font-weight-bold pt-1">登録情報</h5>
+       </div>
+       <div class="col-sm-2 mr-auto">
+         <%= link_to '編集する', customers_edit_path, class: "btn btn-success btn-sm" %>
+       </div>
+     </div>
+   </div>
     
 <div class="container">
-     <div class="row mb-2">
-       <div class="col-sm-2 border border-dark">
+     <div class="row">
+       <div class="col-sm-2 border border-dark bg-info">
         <small><label>氏名<label></small>
        </div>
          <div class="col-sm-5 border border-dark">
-          <small><%= @customer.last_name %>+<%= @customer.first_name %></small>
+          <small><%= @customer.last_name %>　<%= @customer.first_name %></small>
          </div>
      </div>
      
-     <div class="row mb-2">
-       <div class="col-sm-2 border border-dark">
+     <div class="row">
+       <div class="col-sm-2 border border-dark bg-info">
         <small><label>カナ<label></small>
        </div>
          <div class="col-sm-5 border border-dark">
-          <small><%= @customer.last_name_kana %>+<%= @customer.first_name_kana %></small>
+          <small><%= @customer.last_name_kana %>　<%= @customer.first_name_kana %></small>
          </div>
      </div>
      
-     <div class="row mb-2">
-       <div class="col-sm-2 border border-dark">
+     <div class="row">
+       <div class="col-sm-2 border border-dark bg-info">
         <small><label>郵便番号<label></small>
        </div>
          <div class="col-sm-5 border border-dark">
@@ -38,8 +49,8 @@
          </div>
      </div>
      
-     <div class="row mb-2">
-       <div class="col-sm-2 border border-dark">
+     <div class="row">
+       <div class="col-sm-2 border border-dark bg-info">
         <small><label>住所<label></small>
        </div>
          <div class="col-sm-5 border border-dark">
@@ -47,8 +58,8 @@
          </div>
      </div>
      
-     <div class="row mb-2">
-       <div class="col-sm-2 border border-dark">
+     <div class="row">
+       <div class="col-sm-2 border border-dark bg-info">
         <small><label>電話番号<label></small>
        </div>
          <div class="col-sm-5 border border-dark">
@@ -56,11 +67,30 @@
          </div>
      </div>
      
-     <div class="row mb-2">
-       <div class="col-sm-2 border border-dark">
+     <div class="row">
+       <div class="col-sm-2 border border-dark bg-info">
         <small><label>メールアドレス<label></small>
        </div>
          <div class="col-sm-5 border border-dark">
           <small><%= @customer.email %></small>
          </div>
      </div>
+     
+   <div class="container mt-4">
+     <div class="row mb-2">
+       <div class="col-sm-2">
+        <h5 class="font-weight-bold pt-1">配送先</h5>
+       </div>
+       <div class="col-sm-2 mr-auto">
+         <%= link_to '一覧を見る', addresses_path, class: "btn btn-primary btn-sm" %>
+       </div>
+     </div>
+     <div class="row">
+       <div class="col-sm-2">
+        <h5 class="font-weight-bold pt-1">注文履歴</h5>
+       </div>
+       <div class="col-sm-2 mr-auto">
+         <%= link_to '一覧を見る', addresses_path, class: "btn btn-primary btn-sm" %>
+       </div>
+     </div>
+   </div>
