@@ -1,5 +1,6 @@
 class Public::OrdersController < ApplicationController
   def new
+     @order = Order.new
   end
 
   def confilm
@@ -15,6 +16,7 @@ class Public::OrdersController < ApplicationController
   end
   
   def show
+    render "public/orders/complete"
   end
 
 end

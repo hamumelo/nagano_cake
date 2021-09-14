@@ -1,4 +1,4 @@
-<%= render 'public/customers/_header' %>
+<%= render 'public/homes/top_header' %>
 
 
 <div class="container mt-5">
@@ -12,7 +12,7 @@
 <div class="container">
   <div class="row">
     <div class="mt-4 mb-4 col-4">
-      <h5 class="bg-light"><strong>注文履歴詳細</strong></h5>
+      <h5 class="bg-light"><strong>商品一覧</strong></h5>
     </div>
   </div>
 </div>
@@ -24,10 +24,14 @@
  <div class="row">
     <% @items.each do |item| %>
     <div class="col-sm-3">
-  　<span><%= attachment_image_tag item, :image, size: "180x104", fallback: "no_image.jpg" %></span>
+      <span><%= link_to item_path(item.id) do %>
+            <%= attachment_image_tag item, :image, size: "180x104", fallback: "no_image.jpg" %>
+            <% end %></span>
       <p><%= item.name %></p>
       <p><%= converting_to_jpy(item.with_tax_price) %></p>
     </div>
   <% end %>
  </div>
 </div>
+
+<%= paginate @items %>

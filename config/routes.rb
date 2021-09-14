@@ -14,24 +14,21 @@ Rails.application.routes.draw do
  scope module: :public do
   root to: 'homes#top'
   get '/about' => 'homes#about'
-  
-
-  # get '/customers/sign_up' => 'registrations#new'
-  # post '/customers' => 'registrations#create'
-  # get '/customers/sign_in' => 'sessions#new'
-  # post '/customers/sign_in' => 'sessions#create'
-  # delete '/customers/sign_out' => 'sessions#destroy'
   get '/customers/my_page' => 'customers#show'
   get '/customers/edit' => 'customers#edit'
-  resources :items, only: [:index, :show]
   patch '/customers' => 'customers#update'
   get '/customers/unsubscribe' => 'customers#unsubscribe'
   patch '/customers/withdraw' => 'customers#withdraw'
+  
+  resources :items, only: [:index, :show]
+  
   resources :cart_items, only: [:index, :update, :destroy, :create]
   delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
+  
   resources :orders, only: [:new, :create, :index, :show]
   post '/orders/confirm' => 'orders#comfirm'
-  post '/orders/complete' => 'orders#complete'
+  get '/orders/complete' => 'orders#complete'
+  
   resources :addresses, only: [:index, :edit, :create, :update, :destroy]
  end
 

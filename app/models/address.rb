@@ -1,5 +1,5 @@
 class Address < ApplicationRecord
   
-  belongs_to :customers, dependent: :destroy
+  belongs_to :customer, optional: true
   
 end

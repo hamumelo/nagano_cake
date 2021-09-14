@@ -1,0 +1,37 @@
+<%= render 'public/homes/top_header' %>
+
+<!--配送先登録/一覧画面-->
+<div class="container">
+  <div class="form-group row">
+    <div class="mt-5 col-sm-2.5">
+      <h5 class="bg-light ml-5"><strong>注文情報入力</strong></h5>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  
+  <%= form_with model: @order, url: orders_path, local: true do |f| %>
+      <h5><strong>支払方法</strong></h5>
+     <div class="field row mt-2">
+        <div class="col-sm-2">
+    <%= f.radio_button :payment_method, :credit_card, checked: "checked" %>
+    <%= f.label :クレジットカード, class: "payment_method_label" %><br>
+    <%= f.radio_button :payment_method, :transfertransfer, checked: "checked" %>
+    <%= f.label :銀行振込, class: "payment_method_label" %>
+        </div>
+      </div>
+      
+      <h5><strong>お届け先</strong></h5>
+     <div class="field row mt-2">
+        <div class="col-sm-2">
+    <%= f.radio_button :payment_method, :credit_card, checked: "checked" %>
+    <%= f.label :クレジットカード, class: "payment_method_label" %><br>
+    <%= f.radio_button :payment_method, :transfertransfer, checked: "checked" %>
+    <%= f.label :銀行振込, class: "payment_method_label" %>
+        </div>
+      </div>
+  
+    <% end %>
+      </div>
