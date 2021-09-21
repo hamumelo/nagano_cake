@@ -1,4 +1,4 @@
-<%= render 'public/homes/top_header' %>
+<%= render 'public/customers/header' %>
 
 
 <div class="container mt-5">
@@ -27,8 +27,8 @@
       <span><%= link_to item_path(item.id) do %>
             <%= attachment_image_tag item, :image, size: "180x104", fallback: "no_image.jpg" %>
             <% end %></span>
-      <p><%= item.name %></p>
-      <p><%= converting_to_jpy(item.with_tax_price) %></p>
+      <small><p><%= item.name %></p></small>
+      <p>¥<%= converting_to_jpy(item.with_tax_price) %></p>
     </div>
   <% end %>
  </div>

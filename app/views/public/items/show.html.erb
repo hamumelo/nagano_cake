@@ -1,4 +1,4 @@
-<%= render 'public/homes/top_header' %>
+<%= render 'public/customers/header' %>
 
 
 <!--商品詳細ページ-->
@@ -42,7 +42,8 @@
      
   
     <%= form_with model: @cart_item, url: cart_items_path, local:true do |f| %>
-    <%= f.hidden_field :item_id %>
+    <%= f.hidden_field :customer_id, value: @customer.id %>
+    <%= f.hidden_field :item_id, value: @item.id %>
      <div class="row mt-4">
        <div class="col-sm-3 pt-4">
         <%= f.select :amount, *[1..10], {include_blank: "個数選択"}, class: "btn-sm form-control" , required: true %>

@@ -1,6 +1,6 @@
-<%= render 'public/homes/top_header' %>
+<%= render 'public/customers/header' %>
 
-<!--配送先登録/一覧画面-->
+ <!--配送先登録/一覧画面-->
 <div class="container">
   <div class="form-group row">
     <div class="mt-5 col-sm-2.5">
@@ -12,24 +12,75 @@
 
 <div class="container">
   
-  <%= form_with model: @order, url: orders_path, local: true do |f| %>
+  <%= form_with model: @order, url: confirm_orders_path, local: true do |f| %>
       <h5><strong>支払方法</strong></h5>
-     <div class="field row mt-2">
-        <div class="col-sm-2">
-    <%= f.radio_button :payment_method, :credit_card, checked: "checked" %>
-    <%= f.label :クレジットカード, class: "payment_method_label" %><br>
-    <%= f.radio_button :payment_method, :transfertransfer, checked: "checked" %>
-    <%= f.label :銀行振込, class: "payment_method_label" %>
-        </div>
+     <div class="field row mt-2 ml-3">
+      <div class="col-sm-2">
+        <%= f.radio_button :payment_method, Order.payment_methods.key(0), checked: "checked" %>
+        <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %><br>
       </div>
+      <div class="col-sm-2">
+          <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+          <%= f.label :payment_method, Order.payment_methods_i18n[:transfer]%>
+      </div>
+     </div>
       
       <h5><strong>お届け先</strong></h5>
-     <div class="field row mt-2">
+     <div class="field row mt-2 ml-3">
+      <div class="col-sm-6">
+        <%= f.radio_button :select_address_0, "0", checked: "checked" %>
+        <%= f.label :select_address_0, "ご自身の住所" %><br>
+      <spam class="pl-4">〒<%= current_customer.postal_code %><%= current_customer.address %></spam><br>
+      <spam class="pl-4"><%=current_customer.last_name %><%=current_customer.first_name %>
+         <%= f.hidden_field :postal_code, value: @order.postal_code %>
+         <%= f.hidden_field :address, value: @order.address %>
+         <%= f.hidden_field :name, value: @order.name %>
+      </div>
+     </div>
+     <div class="field row mt-2 ml-3">
+      <div class="col-sm-6">
+         <%= f.radio_button :select_address_1, "1" %>
+         <%= f.label :select_address_1, "登録済住所から選択" %><br>
+         <spam class="pl-4"><%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :full_address), class: "ml-5" %></spam>
+      </div>
+     </div>
+     <div class="field row mt-2 ml-3">
+      <div class="col-sm-6">
+        <%= f.radio_button :select_address_2, "2" %>
+        <%= f.label :select_address_2, "新しいお届け先" %><br>
+      </div>
+     </div>
+      
+     <div class="field row mt-2 ml-5">
         <div class="col-sm-2">
-    <%= f.radio_button :payment_method, :credit_card, checked: "checked" %>
-    <%= f.label :クレジットカード, class: "payment_method_label" %><br>
-    <%= f.radio_button :payment_method, :transfertransfer, checked: "checked" %>
-    <%= f.label :銀行振込, class: "payment_method_label" %>
+        <small><%= f.label :postal_code, "郵便番号(ハイフンなし)" %></small>
+        </div>
+        <div class="col-sm-3">
+         <%= f.text_field :postal_code, autofocus: true, placeholder:"0000000", class: "form-control form-control-sm" %>
+        </div>
+    </div>
+      
+     <div class="field row mt-2 ml-5">
+        <div class="col-sm-2">
+        <small><%= f.label :address, "住所" %></small>
+        </div>
+        <div class="col-sm-6">
+         <%= f.text_field :address, autofocus: true, placeholder:"東京都渋谷区代々木神園町0-0", class: "form-control form-control-sm" %>
+        </div>
+    </div>
+      
+     <div class="field row mt-2 ml-5">
+        <div class="col-sm-2">
+        <small><%= f.label :name, "宛名" %></small>
+        </div>
+        <div class="field col-sm-3">
+          <%= f.text_field :name, autofocus: true, placeholder:"令和道子", class: "form-control form-control-sm" %>
+        </div>
+    </div>
+        
+      <div class="row mt-2">
+        <div class='col-md-7 offset-md-1 text-center'>
+          <%= f.submit '確認画面へ進む', class: "btn btn-primary btn-sm" %>
         </div>
       </div>
   
