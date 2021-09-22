@@ -28,25 +28,22 @@
       <h5><strong>お届け先</strong></h5>
      <div class="field row mt-2 ml-3">
       <div class="col-sm-6">
-        <%= f.radio_button :select_address_0, "0", checked: "checked" %>
+        <%= f.radio_button :select_address, "0", checked: "checked" %>
         <%= f.label :select_address_0, "ご自身の住所" %><br>
       <spam class="pl-4">〒<%= current_customer.postal_code %><%= current_customer.address %></spam><br>
       <spam class="pl-4"><%=current_customer.last_name %><%=current_customer.first_name %>
-         <%= f.hidden_field :postal_code, value: @order.postal_code %>
-         <%= f.hidden_field :address, value: @order.address %>
-         <%= f.hidden_field :name, value: @order.name %>
       </div>
      </div>
      <div class="field row mt-2 ml-3">
       <div class="col-sm-6">
-         <%= f.radio_button :select_address_1, "1" %>
+         <%= f.radio_button :select_address, "1" %>
          <%= f.label :select_address_1, "登録済住所から選択" %><br>
          <spam class="pl-4"><%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :full_address), class: "ml-5" %></spam>
       </div>
      </div>
      <div class="field row mt-2 ml-3">
       <div class="col-sm-6">
-        <%= f.radio_button :select_address_2, "2" %>
+        <%= f.radio_button :select_address, "2" %>
         <%= f.label :select_address_2, "新しいお届け先" %><br>
       </div>
      </div>
@@ -83,6 +80,6 @@
           <%= f.submit '確認画面へ進む', class: "btn btn-primary btn-sm" %>
         </div>
       </div>
-  
     <% end %>
+  
       </div>

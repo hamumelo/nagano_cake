@@ -9,9 +9,9 @@ class Customer < ApplicationRecord
          has_many :cart_items, dependent: :destroy
   
   default_scope -> { order(created_at: :desc) }
-   enum is_active: { true: true, false: false }
+#   enum is_active: { true: true, false: false }
   
-def full_address
+def full_customer_address
     '〒' + postal_code + ' ' + address + ' ' + name
 end
          
