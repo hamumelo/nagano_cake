@@ -26,7 +26,8 @@ Things you may want to cover:
 
 
 
-    <%= f.hidden_field :customer_id, value: @customer.id %>
-    <%= f.hidden_field :image, value: @item.image_id %>
-    <%= f.hidden_field :name, value: @item.name %>
-    <%= f.hidden_field :price, value: @item.price %>
+      <%= f.hidden_field :order_id, value: @order_detail.order_id %>
+      <%= f.hidden_field :item_id, value: @order_detail.item_id %>
+      <%= f.hidden_field :price, value: @order_detail.price %>
+      <%= f.hidden_field :amount, value: @order_detail.amount %>
+      <%= f.hidden_field :name, value: @order_detail.item.name %>

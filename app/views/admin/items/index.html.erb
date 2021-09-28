@@ -46,7 +46,12 @@
           <%= item.genre.name %>
         </td>
         <td>
-          <%= item.is_active %>
+          <% if item.is_active == true %>
+          <strong class="text-success"><%= "販売中" %></strong>
+          <% else %>
+          <% item.is_active == false %>
+          <strong class="text-secondary"><%= "販売停止中" %></strong>
+          <% end %>
         </td>
   
     <% end %>

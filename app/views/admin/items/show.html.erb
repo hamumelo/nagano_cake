@@ -60,7 +60,12 @@
         <small><label>販売ステータス</label></small>
        </div>
          <div class="col-sm-4">
-          <strong><%= @item.is_active %></strong>
+          <% if @item.is_active == true %>
+          <strong class="text-success"><%= "販売中" %></strong>
+          <% else %>
+          <% @item.is_active == false %>
+          <strong class="text-secondary"><%= "販売停止中" %></strong>
+          <% end %>
          </div>
      </div>
      

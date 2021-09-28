@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   get '/customers/unsubscribe' => 'customers#unsubscribe'
   patch '/customers/withdraw' => 'customers#withdraw'
   
-  resources :items, only: [:index, :show]
+  resources :items, only: [:index, :show] do
+  resources :order_details, only: [:update]
+  end
   
   resources :cart_items, only: [:index, :update, :destroy, :create] do
   collection do
@@ -46,15 +48,16 @@ end
   
   # 管理者ページ
   namespace :admin do
-    resources :sessions, only:[:new, :create, :destroy]
-    resources :homes, only:[:top]
+    # resources :sessions, only:[:new, :create, :destroy]
+    get '/' => 'homes#top'
     resources :items
     resources :genres, only:[:index, :create, :edit, :update]
     resources :customers, only:[:index, :show, :edit, :update]
-  get '/items' => 'public/items#index'
-  get '/items/:id' => 'public/items#show'
+  get '/items' => 'items#index'
+  get '/items/:id' => 'items#show'
     resources :orders, only:[:show, :update]
     resources :order_details, only:[:update]
  end
+# end
  
 end

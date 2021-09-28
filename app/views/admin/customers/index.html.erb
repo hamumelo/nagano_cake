@@ -42,7 +42,12 @@
           <%= customer.email %>
         </td>
         <td>
-          <%= customer.is_active %>
+          <% if customer.is_active == true %>
+          <strong class="text-success"><%= "有効" %></strong>
+          <% else %>
+          <% customer.is_active == false %>
+          <strong class="text-secondary"><%= "退会" %></strong>
+          <% end %>
         </td>
   
     <% end %>

@@ -37,7 +37,7 @@
         </td>
         <td><%= converting_to_jpy(cartItem.item.with_tax_price) %></td>
         
-    <%= form_with model: @cart_item, url: cart_items_path, local:true do |f| %>
+    <%= form_with model: cartItem, url: cart_item_path(cartItem.id), local:true do |f| %>
         <td  class="form-inline">
          <%= f.select :amount, *[1..10], class: "btn-sm form-control", required: true %>
       　 <%= f.submit '変更', class: "btn btn-success form-control btn-sm" %>

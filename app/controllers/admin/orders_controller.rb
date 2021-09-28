@@ -1,6 +1,6 @@
 class Admin::OrdersController < ApplicationController
   def show
-    @order_details = Order_detail.page(params[:page]).reverse_order
+    @orders = Order.page(params[:page]).reverse_order
     @order = Order.find(params[:id])
   end
   
