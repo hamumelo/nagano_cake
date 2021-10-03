@@ -6,15 +6,13 @@ class Public::AddressesController < ApplicationController
   
   def create
      @address = Address.new(address_params)
-     @address.save
-    redirect_to addresses_path(@address.id)
-    # if @genre_post.save
-    #   flash[:notice] = "genre was successfully created."
-    # redirect_to admin_genres_path(@book_new.id)
-    # else
-    #   @genres = Genre.all
-    #   render :index
-    # end
+    if @address.save
+      flash[:notice] = "配送先を登録しました"
+    redirect_to addresses_path
+    else
+     @addresses = Address.all
+      render :index
+    end
   end
 
   def edit
@@ -23,19 +21,18 @@ class Public::AddressesController < ApplicationController
 
   def update
      @address = Address.find(params[:id])
-     @address.update(address_params)
+    if @address.update(address_params)
+      flash[:notice] = "配送先を変更しました"
     redirect_to addresses_path
-    # if @item.update(item_params)
-    #   flash[:notice] = "You have updated genre successfully."
-    # redirect_to admin_item_path(@item.id)
-    # else
-    #   render :edit
-    # end
+    else
+      render :edit
+    end
   end
 
   def destroy
     @address = Address.find(params[:id])
     @address.destroy
+      flash[:notice] = "配送先を削除しました"
     redirect_to addresses_path
   end
 

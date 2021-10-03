@@ -8,14 +8,12 @@ class Public::OrdersController < ApplicationController
   def confirm
     @order = Order.new(order_params)
     @cart_items = CartItem.all
-    # @order_detail = OrderDetail.new(order_detail_params)
     @order.shipping_cost = 800
     @total_price = 0
     @cart_items.each do |cartItem|
     @total_price += cartItem.subtotal
     @order.total_payment = @order.shipping_cost + @total_price
     end
-    # byebug
      if params[:order][:select_address] == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
@@ -36,7 +34,6 @@ class Public::OrdersController < ApplicationController
   def create
     cart_items = current_customer.cart_items.all
     @order = current_customer.orders.new(order_params)
-    # @order.customer_id = current_customer.id
    if @order.save
     cart_items.each do |cartItem|
       order_detail = OrderDetail.new
@@ -47,7 +44,7 @@ class Public::OrdersController < ApplicationController
       order_detail.save
    end
      current_customer.cart_items.destroy_all
-    redirect_to  orders_path
+    redirect_to  complete_orders_path
    else
     @order = Order.new(order_params)
     render :confirm
@@ -56,7 +53,6 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = Order.page(params[:page]).reverse_order
-    @cart_items = CartItem.all
   end
   
   def show

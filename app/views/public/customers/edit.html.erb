@@ -9,7 +9,7 @@
   </div>
 
 <%= form_with model: @customer, url: customers_path, local: true do |f| %>
-      
+      <%= render 'layouts/error_messages', model: f.object %>
      <div class="field row mt-3">
         <div class="col-sm-2">
         <small><%= f.label :name, "氏名" %></small>

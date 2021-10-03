@@ -16,7 +16,9 @@
         <label>購入者</label>
        </div>
          <div class="col-sm-6">
+          <%= link_to admin_customer_path(@customer.id), class: "text-dark" do %>
           <%= @order.name %>
+          <% end %>
          </div>
      </div>
     
@@ -25,7 +27,7 @@
         <label>注文日</label>
        </div>
          <div class="col-sm-6">
-          <%= @order.created_at %>
+          <%= @order.created_at.to_s(:datetime_jp) %>
          </div>
      </div>
      
@@ -44,72 +46,78 @@
         <label>支払方法</label>
        </div>
          <div class="col-sm-6">
-          <%= @order.payment_method %>
+          <%= @order.payment_method_i18n %>
          </div>
      </div>
+  
+     <%= form_with model: @order, url: admin_order_path(@order.id), local:true do |f| %>
      
      <div class="row mb-2">
        <div class="col-sm-2">
         <label>注文ステータス</label>
        </div>
-         <div class="col-sm-4">
-         <%= f.collection_select(:status, @orders, :id, :status {prompt: "--選択して下さい--"}, class: "form-control") %>
+         <div class="col-sm-1">
+         <%= f.select :status, Order.statuses.keys %>
          </div>
-       <div class="col-sm-2">
+       <div class="col-sm-2 ml-4">
         <%= f.submit '更新', class:"btn btn-success btn-sm" %>
        </div>
-       
-       <table class='table table-hover table-inverse'>
-  <thead>
-    <tr>
-      <th>商品名</th>
-      <th>単価(税込)</th>
-      <th>数量</th>
-      <th>小計</th>
-      <th>制作ステータス</th>
-      <th colspan="5"></th>
-    </tr>
-  </thead>
-  <tbody>
-    
- <div class="row mb-2">
-  <div class="col-sm-7">
-    <% @order_details.each do |order_detail| %>
-      <tr>
-        <td>
-          <%= @item.name %>
-        </td>
-        <td>
-          <%= converting_to_jpy(@item.with_tax_price) %>
-        </td>
-        <td>
-          <%= order_detail.price %>
-        </td>
-        <td>
-          <%= @order.total_payment %>
-        </td>
-        <td>
-         <%= f.collection_select(:status, @orders, :id, :name, {prompt: "--選択して下さい--"}, class: "form-control") %>
-       <div class="col-sm-2">
-        <%= f.submit '更新', class:"btn btn-success btn-sm" %>
-       </div>
-        </td>
+     </div>
     <% end %>
-  </div>
-       <div class="col-sm-3">
-        <label>商品合計</label></br >
-        <label>送料</label></br >
-        <label>商品合計</label></br >
+   </div>
+   
+<div class="container mt-4">
+  <div class="row">
+    <div class='col-sm-7 mr-5'>
+       
+      <table class='table table table-sm table-inverse '>
+       <thead>
+         <tr>
+           <th class="table-active" width="20%">商品名</th>
+           <th class="table-active" width="15%">単価(税込)</th>
+           <th class="table-active" width="15%">数量</th>
+           <th class="table-active" width="15%">小計</th>
+           <th class="table-active" width="30%">制作ステータス</th>
+         </tr>
+       </thead>
+        <tbody>
+         <% @order_details.each do |orderDetail| %>
+           <tr>
+             <td>
+               <small><%= orderDetail.item.name %></small>
+             </td>
+             <td>
+               <small><%= converting_to_jpy(orderDetail.item.with_tax_price) %></small>
+             </td>
+             <td>
+               <small><%= orderDetail.item.price %></small>
+             </td>
+             <td>
+               <small><%= converting_to_jpy(orderDetail.item.with_tax_price * orderDetail.amount) %></small>
+             </td>
+       
+          <%= form_with model: orderDetail, url: admin_order_detail_path(orderDetail.id), local:true do |f| %>
+             <td class="form-inline">
+              <%= f.select :making_status, OrderDetail.making_statuses.keys %>
+              <span class="pl-3"><%= f.submit '更新', class:"btn btn-success btn-sm form-inline" %></span>
+             </td>
+          <% end %>
+         <% end %>
+         </tbody>
+        </table>
        </div>
-         <div class="col-sm-2">
-          <%= @order.total_payment %>
-          <%= @order.shipping_cost %>
-          <%= @order.total_payment %>
-         </div>
+           <div class="col-sm-1.5 mt-auto">
+            <label class="font-weight-bold">商品合計</label><br>
+            <label class="font-weight-bold">送料</label><br>
+            <label class="font-weight-bold">請求金額合計</label>
+           </div>
+             <div class="col-sm-2 mt-auto">
+              <label><%= converting_to_jpy(@total_price) %></label><br>
+              <label><%= converting_to_jpy(@order.shipping_cost) %></label><br>
+              <label class="font-weight-bold"><%= converting_to_jpy(@order.total_payment) %></label>
+             </div>
+      </div>
+</div>
   
-</div>
-  </tbody>
- </table>
-</div>
 
 <%= paginate @order_details %>

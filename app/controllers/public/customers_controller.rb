@@ -14,17 +14,24 @@ class Public::CustomersController < ApplicationController
   def unsubscribe
      @customer = current_customer
   end
+  
+  def withdraw
+    @customer = current_customer
+    # @customer = Customer.find_by(name: params[:name])
+    @customer.update(is_active: false)
+    reset_session
+    redirect_to root_path
+  end
 
   def update
      @customer = current_customer
-     @customer.update(customer_params)
+    if @customer.update(customer_params)
+      flash[:notice] = "会員情報を変更しました"
     redirect_to customers_my_page_path
-    # if @item.update(item_params)
-    #   flash[:notice] = "You have updated genre successfully."
-    # redirect_to admin_item_path(@item.id)
-    # else
-    #   render :edit
-    # end
+    else
+     @customer = current_customer
+      render :edit
+    end
   end
 
   private

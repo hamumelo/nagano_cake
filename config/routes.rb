@@ -1,16 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :admins, controllers: {
-  sessions:      'admins/sessions',
-  passwords:     'admins/passwords',
-  registrations: 'admins/registrations'
-}
-
- 
  
   # 顧客ページ
-  
-  
-  
  scope module: :public do
   root to: 'homes#top'
   get '/about' => 'homes#about'
@@ -21,7 +11,6 @@ Rails.application.routes.draw do
   patch '/customers/withdraw' => 'customers#withdraw'
   
   resources :items, only: [:index, :show] do
-  resources :order_details, only: [:update]
   end
   
   resources :cart_items, only: [:index, :update, :destroy, :create] do
@@ -48,7 +37,6 @@ end
   
   # 管理者ページ
   namespace :admin do
-    # resources :sessions, only:[:new, :create, :destroy]
     get '/' => 'homes#top'
     resources :items
     resources :genres, only:[:index, :create, :edit, :update]
@@ -58,6 +46,10 @@ end
     resources :orders, only:[:show, :update]
     resources :order_details, only:[:update]
  end
-# end
  
+  devise_for :admin, controllers: {
+  sessions:      'admin/sessions',
+  passwords:     'admin/passwords',
+  registrations: 'admin/registrations'
+}
 end
