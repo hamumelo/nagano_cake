@@ -1,13 +1,14 @@
 class ApplicationController < ActionController::Base
+  # before_action :authenticate_admin!,except: [:top, :about, :new]
+  # before_action :authenticate_customer!,except: [:top, :about, :new]
   before_action :configure_permitted_parameters, if: :devise_controller?
-  
   
   def after_sign_in_path_for(resource)
     case resource
     when Customer
-      customers_my_page_path
+      root_path
     when Admin
-      admin_user_posts_path
+      admin_path
     end
   end
 

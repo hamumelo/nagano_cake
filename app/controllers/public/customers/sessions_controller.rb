@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Public::Customers::SessionsController < Devise::SessionsController
-  before_action :configure_sign_in_params, only: [:create]
+  # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -27,6 +27,11 @@ class Public::Customers::SessionsController < Devise::SessionsController
     end
   end
 
+
+  def after_sign_out_path_for(resource)
+    flash[:notice] = "ログアウトしました"
+    root_path
+  end
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.

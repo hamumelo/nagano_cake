@@ -1,30 +1,34 @@
-class Admin::SessionsController < ApplicationController
+# frozen_string_literal: true
 
-  def new
-    # @registrations = Registrations.new
-  end
+class Admin::Admins::SessionsController < Devise::SessionsController
+  # before_action :configure_sign_in_params, only: [:create]
 
-  def create
-    # @registrations = Registrations.new(registration_params)
-    # @registration.save
-    # redirect_to admin_items_path(@item.id)
-    # if @registration.save
-    #   flash[:notice] = "genre was successfully created."
-    # redirect_to admin_items_path(@item.id)
-    # else
-    # @registration = Registration.new
-    # @genres = Genre.all
-    # end
-  end
-
-  def destroy
-    # @registrations = Registrations.new
-  end
-
-  private
-
-  # def item_params
-  #   params.require(:registration).permit(:image, :name, :introduction, :genre_id, :price, :is_active)
+  # GET /resource/sign_in
+  # def new
+  #   super
   # end
+
+  # POST /resource/sign_in
+  # def create
+  #   super
+  # end
+
+  # DELETE /resource/sign_out
+  # def destroy
+  #   super
+  # end
+
+  # protected
+
+  # If you have extra params to permit, append them to the sanitizer.
+  # def configure_sign_in_params
+  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
+  # end
+
+  def after_sign_out_path_for(resource)
+    flash[:notice] = "ログアウトしました"
+    new_admin_session_path
+  end
+  
   
 end

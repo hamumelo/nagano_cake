@@ -36,6 +36,11 @@ end
 }
   
   # 管理者ページ
+  devise_for :admins, controllers: {
+  sessions:      'admin/admins/sessions',
+  passwords:     'admin/admins/passwords',
+  # registrations: 'admin/registrations'
+}
   namespace :admin do
     get '/' => 'homes#top'
     resources :items
@@ -47,9 +52,4 @@ end
     resources :order_details, only:[:update]
  end
  
-  devise_for :admin, controllers: {
-  sessions:      'admin/sessions',
-  passwords:     'admin/passwords',
-  registrations: 'admin/registrations'
-}
 end

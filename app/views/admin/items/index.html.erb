@@ -3,15 +3,19 @@
 
 <!--商品一覧画面-->
 <div class="container">
-  <div class="row">
-    <div class="mt-5 col-sm-2.5">
-      <h5 class="bg-light"><strong>商品一覧</strong></h5>
+  <div class="row mt-5 ">
+    <div class="col-sm-9 ml-5">
+      <big class="bg-light"><strong>商品一覧</strong></big>
     </div>
+    <div class="col-sm-2">
+      <big><%= link_to '+', new_admin_item_path, class: "btn-sm border rounded-circle text-secondary shadow bg-white rounded" %></big>
+    </div>
+  </div>
   </div>
   
   
   
-  <div class="container">
+  <div class="container mt-3">
   <div class="row">
    <div class='col-md-10 offset-md-1'>
 
@@ -23,7 +27,6 @@
       <th>税抜価格</th>
       <th>ジャンル</th>
       <th>ステータス</th>
-      <th colspan="5"></th>
     </tr>
   </thead>
   <tbody>
